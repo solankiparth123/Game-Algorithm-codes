@@ -1,0 +1,57 @@
+PlayerPrefs in Unity (Simple Explanation):
+PlayerPrefs is a way to store and retrieve small amounts of data, like game settings, high scores, or player preferences, even after the game is closed and reopened. Unity saves this data locally on the device (PC, mobile, etc.).
+
+Common Uses of PlayerPrefs:
+
+Saving High Scores
+Storing Sound/Music Settings (On/Off)
+Tracking Level Progress
+Saving Player Name or Preferences
+How to Use PlayerPrefs in Unity
+1. Saving Data:
+csharp
+Copy
+Edit
+PlayerPrefs.SetInt("HighScore", 100);
+PlayerPrefs.SetFloat("Volume", 0.5f);
+PlayerPrefs.SetString("PlayerName", "Parth");
+
+// Don't forget to save changes (optional for immediate effect)
+PlayerPrefs.Save();
+2. Retrieving Data:
+csharp
+Copy
+Edit
+int highScore = PlayerPrefs.GetInt("HighScore", 0); // Default value 0 if no data found
+float volume = PlayerPrefs.GetFloat("Volume", 1.0f); // Default value 1.0 if no data found
+string playerName = PlayerPrefs.GetString("PlayerName", "Guest"); // Default "Guest" if no data found
+3. Deleting Data:
+csharp
+Copy
+Edit
+PlayerPrefs.DeleteKey("HighScore");  // Delete specific data
+PlayerPrefs.DeleteAll();             // Delete all stored data
+Example Scenario: Saving and Loading High Score
+csharp
+Copy
+Edit
+void SaveHighScore(int score)
+{
+    if (score > PlayerPrefs.GetInt("HighScore", 0))
+    {
+        PlayerPrefs.SetInt("HighScore", score);
+        PlayerPrefs.Save();
+        Debug.Log("New High Score Saved: " + score);
+    }
+}
+
+void LoadHighScore()
+{
+    int highScore = PlayerPrefs.GetInt("HighScore", 0);
+    Debug.Log("High Score: " + highScore);
+}
+Important Notes:
+Best for small data (scores, settings), not for large data (like game progress with many variables).
+Works across different game sessions (persists data).
+Data is stored in registry (Windows), PlayerPrefs file (Android/iOS).
+Let me know if you need more details! 😊
